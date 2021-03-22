@@ -1,5 +1,5 @@
 import atexit
-from ConfigParser import RawConfigParser
+from configparser import RawConfigParser
 from mininet.topo import Topo
 import logging
 import os
