@@ -207,7 +207,7 @@ class Partitioner(object):
         self.partitions = []
         for i in range(0, max(mapping.values()) + 1):
             self.partitions.append(Topo())
-        print mapping
+        print(mapping)
         switch_to_part = {}
         for switch in self.switches:
             if(not switch in mapping):

@@ -22,8 +22,8 @@ if(int(mpl.__version__.split(".")[0]) <= 1 and
     oldversion = True
 
 if(not len(sys.argv) in [2, 3]):
-    print "ERROR: Invalid number of parameters.\nSyntax: " + sys.argv[0] +\
-          " LOGFILE_FOLDER [IMAGE_FILENAME] "
+    print("ERROR: Invalid number of parameters.\nSyntax: " + sys.argv[0] +\
+          " LOGFILE_FOLDER [IMAGE_FILENAME] ")
     sys.exit(1)
 
 folder = sys.argv[1]
@@ -38,7 +38,7 @@ for filename in os.listdir(folder):
     elif filename[:12] == "maxinet_cpu_":
         cpulogs.append(filename)
     else:
-        print "unknown file: " + filename
+        print("unknown file: " + filename)
 
 numworkers = len(memlogs)
 
@@ -61,7 +61,7 @@ for filename in cpulogs:
             axis_x.append(timestamp)
             axis_y.append(used)
     ax[graph].plot(axis_x, axis_y, label=workerHN)
-print ax[graph]
+print(ax[graph])
 xmin, xmax = map(lambda x: int(x), ax[graph].get_xaxis().get_data_interval())
 xticks = range(xmin, xmax)[0::10]
 xlabels = map(lambda x: x - xmin, xticks)
@@ -122,9 +122,9 @@ for filename in memlogs:
         axis_y_cached.append(cached / 1024.0)
     axis_y = np.row_stack((axis_y_free, axis_y_buffers, axis_y_cached))
     axis_y_stack = np.cumsum(axis_y, axis=0)
-    print axis_y_stack
+    print(axis_y_stack)
     axis_x = np.array(axis_x)
-    print axis_x
+    print(axis_x)
     ax[graph].fill_between(axis_x, 0, axis_y_stack[0, :], facecolor="#CC6666")
     ax[graph].fill_between(axis_x, axis_y_stack[0, :], axis_y_stack[1, :],
                            facecolor="#1DACD6")

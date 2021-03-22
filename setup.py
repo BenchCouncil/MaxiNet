@@ -35,11 +35,11 @@ if((__name__=="__main__") and (sys.argv[1] == "install")):
     f = NamedTemporaryFile('w+t')
     f.write("""
 import os,subprocess
-print "Setting executable bits..."
+print("Setting executable bits...")
 from MaxiNet.tools import Tools
 d = Tools.get_script_dir()
 for f in filter(lambda x: x[-3:]==".sh",os.listdir(d)):
-    print f
+    print(f)
     subprocess.call(["sudo","chmod","a+x",d+f])
 """)
     f.flush()

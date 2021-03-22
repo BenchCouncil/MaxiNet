@@ -67,7 +67,7 @@ class WorkerServer(object):
     def exit_handler(self, signal, frame):
         # I have absolutely no clue why but without this print atexit sometimes
         # doesn't seem to wait for called functions to finish...
-        print "exiting..."
+        print("exiting...")
         self._shutdown = True
         sys.exit()
 
@@ -82,7 +82,7 @@ class WorkerServer(object):
             except:
                 if self._ip != None:
                     #self.ip as an indicator that this worker was connected to the frontend once.
-                    print "Trying to reconnect to FrontendServer..."
+                    print("Trying to reconnect to FrontendServer...")
                     try:
                         try:
                             self._pyrodaemon.unregister(self)
@@ -428,9 +428,9 @@ def getFrontendStatus():
     if(manager_uri):
         manager = Pyro4.Proxy(manager_uri)
         manager._pyroHmacKey=pw
-        print manager.print_worker_status()
+        print(manager.print_worker_status())
     else:
-        print "Could not contact Frontend server at %s:%s" % (ip, port)
+        print("Could not contact Frontend server at %s:%s" % (ip, port))
 
 
 def main():
@@ -463,12 +463,12 @@ def main():
         pw = parsed.password
 
     if os.getuid() != 0:
-        print "MaxiNetWorker must run with root privileges!"
+        print("MaxiNetWorker must run with root privileges!")
         sys.exit(1)
 
     if not (ip and port and pw):
-        print "Please provide MaxiNet.cfg or specify ip, port and password of \
-               the Frontend Server."
+        print("Please provide MaxiNet.cfg or specify ip, port and password of \
+               the Frontend Server.")
     else:
         workerserver = WorkerServer()
 

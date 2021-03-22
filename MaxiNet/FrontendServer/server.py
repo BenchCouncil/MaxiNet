@@ -132,7 +132,7 @@ class MaxiNetManager(object):
         otherwise, deallocate the workers from the cluster
         """
 
-        print "Monitoring clusters..."
+        print("Monitoring clusters...")
 
         while(True):
             time.sleep(5)   #we check all 5 seconds.
