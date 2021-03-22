@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "MaxiNet 1.2 installer"
+echo "MaxiNet-3 1.0 installer"
 echo ""
-echo "This program installs MaxiNet 1.2 and all requirements to the home directory of your user"
+echo "This program installs MaxiNet-3 1.0 and all requirements to the home directory of your user"
 
 if [ "$1" == "--help" ] || [ "$1" == "-h" ]
 then
@@ -70,7 +70,7 @@ else
     if [ "$containernet" == "y" ]; then echo " -Containernet 2.2.1"; fi
     if [ "$metis" == "y" ]; then echo " -Metis 5.1"; fi
     if [ "$pyro" == "y" ]; then echo " -Pyro 4"; fi
-    echo " -MaxiNet 1.2"
+    echo " -MaxiNet-3 1.0"
     echo ""
 
     read -n1 -r -p "Is this OK? Press ANY key to continue or CTRL+C to abort." abort
@@ -147,7 +147,6 @@ fi
 
 cd ~
 sudo rm -rf MaxiNet &> /dev/null
-git clone git://github.com/MaxiNet/MaxiNet.git
+git clone git://github.com/ChengHuangUCAS/MaxiNet.git
 cd MaxiNet
-git checkout v1.2
 sudo make install

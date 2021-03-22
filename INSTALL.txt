@@ -16,10 +16,9 @@ to run MaxiNet on an untrusted or publicly accessible network.
 
 
 Supported Operating Systems:
-Debian 8
-Ubuntu 14.04
+Ubuntu 20.04 server
 
-There are two different ways to install MaxiNet 1.2:
+There are two different ways to install MaxiNet-3 1.0:
  - automated installation using the installer.sh script
  - manual installation using the instructions below.
 
@@ -56,9 +55,8 @@ In case you want to use the automated installer, just issue the following comman
 > sudo pip install Pyro4
 
 5: Download and install MaxiNet
-> cd ~ && git clone git://github.com/MaxiNet/MaxiNet.git
+> cd ~ && git clone git://github.com/ChengHuangUCAS/MaxiNet.git
 > cd MaxiNet
-> git checkout v1.2
 > sudo make install
 
 6: Set up cluster and configure MaxiNet

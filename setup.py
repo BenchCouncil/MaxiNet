@@ -1,16 +1,16 @@
 import sys, os, subprocess,distutils
 from setuptools import setup, find_packages
 
-setup(name='MaxiNet',
-      version='1.2',
-      description='Distributed Software Defined Network Emulation',
-      long_description="MaxiNet extends the famous Mininet emulation environment to span the emulation across several physical machines. This allows to emulate very large SDN networks.",
+setup(name='MaxiNet-3',
+      version='1.0',
+      description='Distributed Software Defined Network Emulation (Python 3)',
+      long_description="MaxiNet extends the famous Mininet emulation environment to span the emulation across several physical machines. This allows to emulate very large SDN networks. MaxiNet-3 is based on MaxiNet 1.2, and transplanted to Python 3.8.",
       classifiers=[
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.8',
       ],
       keywords='mininet MaxiNet SDN Network OpenFlow openvswitch',
-      url='https://www.cs.uni-paderborn.de/?id=maxinet',
-      author_email='maxinet@lists.upb.de',
+      url='https://github.com/ChengHuangUCAS/MaxiNet',
+      author_email='huangcheng14@mails.ucas.edu.cn',
       packages=find_packages(),
       install_requires=[
           'Pyro4',

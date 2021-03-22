@@ -1,5 +1,8 @@
 MaxiNet
 
+MaxiNet-3 1.0:
+ * change: Transplant to Python 3.8.
+
 MaxiNet 1.2:
  * change: Disabled non-functional methods and attributes of NodeWrapper
  * bugfix: Fixed hostname to workerid mapping
