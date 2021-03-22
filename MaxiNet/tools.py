@@ -27,6 +27,8 @@ class MaxiNetConfig(RawConfigParser):
         if(file is None):
             self.read(["/etc/MaxiNet.cfg", os.path.expanduser("~/.MaxiNet.cfg"),
                        "MaxiNet.cfg"])
+        else:
+            self.read(file)
         self.set_loglevel()
         if(register):
             self.register()
@@ -39,11 +41,11 @@ class MaxiNetConfig(RawConfigParser):
 
     @Pyro4.expose
     def get_nameserver_port(self):
-        return self.getint("all", "port_ns")
+        return int(self.get("all", "port_ns"))
 
     @Pyro4.expose
     def get_sshd_port(self):
-        return self.getint("all", "port_sshd")
+        return int(self.get("all", "port_sshd"))
 
     @Pyro4.expose
     def get_frontend_ip(self):
@@ -52,7 +54,7 @@ class MaxiNetConfig(RawConfigParser):
     @Pyro4.expose
     def get_frontend_threads(self):
         if self.has_option("FrontendServer", "threadpool"):
-            return self.getint("FrontendServer", "threadpool")
+            return int(self.get("FrontendServer", "threadpool"))
         return 256
 
     @Pyro4.expose
@@ -76,19 +78,19 @@ class MaxiNetConfig(RawConfigParser):
     @Pyro4.expose
     def run_with_1500_mtu(self):
         if(self.has_option("all","runWith1500MTU")):
-            return self.getboolean("all","runWith1500MTU")
+            return self.get("all","runWith1500MTU") == "True"
         return False
 
     @Pyro4.expose
     def use_stt_tunneling(self):
         if(self.has_option("all","useSTT")):
-            return self.getboolean("all","useSTT")
+            return self.get("all","useSTT") == "True"
         return False
 
     @Pyro4.expose
     def deactivateTSO(self):
         if(self.has_option("all","deactivateTSO")):
-            return self.getboolean("all","deactivateTSO")
+            return self.get("all","deactivateTSO") == "True"
         return False
 
     @Pyro4.expose
