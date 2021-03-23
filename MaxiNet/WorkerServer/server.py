@@ -310,7 +310,7 @@ class MininetManager(object):
             else:
                 self.net = Mininet(topo=topo, intf=TCIntf, link=TCLinkParams,
                                    switch=switch)
-        except Exception, e:
+        except Exception as e:
             self.logger.error("Failed to create mininet instance: %s" % traceback.format_exc())
             raise e
         if STT:

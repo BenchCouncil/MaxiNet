@@ -121,7 +121,7 @@ class CLI(Cmd):
         main = __import__("__main__")
         try:
             exec(cmd, self.pglobals, self.plocals)
-        except Exception, e:
+        except Exception as e:
             traceback.print_exc()
 
     def do_xterm(self, s):
