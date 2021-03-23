@@ -27,8 +27,6 @@ class MaxiNetConfig(RawConfigParser):
         if(file is None):
             self.read(["/etc/MaxiNet.cfg", os.path.expanduser("~/.MaxiNet.cfg"),
                        "MaxiNet.cfg"])
-        else:
-            self.read(file)
         self.set_loglevel()
         if(register):
             self.register()
@@ -41,25 +39,25 @@ class MaxiNetConfig(RawConfigParser):
 
     @Pyro4.expose
     def get_nameserver_port(self):
-        return int(self.get("all", "port_ns"))
+        return self.getint("all", "port_ns")
 
     @Pyro4.expose
     def get_sshd_port(self):
-        return int(self.get("all", "port_sshd"))
+        return self.getint("all", "port_sshd")
 
     @Pyro4.expose
     def get_frontend_ip(self):
-        return self.get("FrontendServer", "ip")
+        return self.get_config("FrontendServer", "ip")
 
     @Pyro4.expose
     def get_frontend_threads(self):
         if self.has_option("FrontendServer", "threadpool"):
-            return int(self.get("FrontendServer", "threadpool"))
+            return self.getint("FrontendServer", "threadpool")
         return 256
 
     @Pyro4.expose
     def get_controller(self):
-        return self.get("all", "controller")
+        return self.get_config("all", "controller")
 
     @Pyro4.expose
     def get_worker_ip(self, hostname, classifier=None):
@@ -68,29 +66,29 @@ class MaxiNetConfig(RawConfigParser):
             return None
         else:
             if(classifier is None):
-                return self.get(hostname, "ip")
+                return self.get_config(hostname, "ip")
             else:
                 if(not self.has_option(hostname, "ip_%s" % classifier)):
                     return self.get_worker_ip(hostname)
                 else:
-                    return self.get(hostname, "ip_%s" % classifier)
+                    return self.get_config(hostname, "ip_%s" % classifier)
 
     @Pyro4.expose
     def run_with_1500_mtu(self):
         if(self.has_option("all","runWith1500MTU")):
-            return self.get("all","runWith1500MTU") == "True"
+            return self.getboolean("all","runWith1500MTU")
         return False
 
     @Pyro4.expose
     def use_stt_tunneling(self):
         if(self.has_option("all","useSTT")):
-            return self.get("all","useSTT") == "True"
+            return self.getboolean("all","useSTT")
         return False
 
     @Pyro4.expose
     def deactivateTSO(self):
         if(self.has_option("all","deactivateTSO")):
-            return self.get("all","deactivateTSO") == "True"
+            return self.getboolean("all","deactivateTSO")
         return False
 
     @Pyro4.expose
@@ -99,11 +97,11 @@ class MaxiNetConfig(RawConfigParser):
 
     @Pyro4.expose
     def get_nameserver_password(self):
-        return self.get("all", "password")
+        return self.get_config("all", "password")
 
     @Pyro4.expose
     def get_loglevel(self):
-        lvl = self.get("all", "logLevel")
+        lvl = self.get_config("all", "logLevel")
         lvls = {"CRITICAL": logging.CRITICAL,
                 "ERROR": logging.ERROR,
                 "WARNING": logging.WARNING,
@@ -131,7 +129,7 @@ class MaxiNetConfig(RawConfigParser):
             self.daemon_thread = None
 
     @Pyro4.expose
-    def get(self, section, option):
+    def get_config(self, section, option):
         return RawConfigParser.get(self, section, option)
 
     @Pyro4.expose
@@ -186,7 +184,7 @@ class SSH_Tool(object):
         if (local[0:5] == "local"):
             rip = "localhost"
 
-        user = self.config.get("all", "sshuser")
+        user = self.config.get_config("all", "sshuser")
         if(rip is None):
             return None
         cm = ["ssh", "-p", str(self.config.get_sshd_port()), "-o",
@@ -212,7 +210,7 @@ class SSH_Tool(object):
         if (loc[0:5] == "local"):
             rip = "localhost"
 
-        user = self.config.get("all", "sshuser")
+        user = self.config.get_config("all", "sshuser")
         if(rip is None):
             return None
         cmd = ["scp", "-P", str(self.config.get_sshd_port()), "-o",
@@ -230,7 +228,7 @@ class SSH_Tool(object):
         if (loc[0:5] == "local"):
             rip = "localhost"
 
-        user = self.config.get("all", "sshuser")
+        user = self.config.get_config("all", "sshuser")
         if(rip is None):
             return None
         cmd = ["scp", "-P", str(self.config.get_sshd_port()), "-o",
@@ -248,7 +246,7 @@ class SSH_Tool(object):
         if (loc[0:5] == "local"):
             rip = "localhost"
 
-        user = self.config.get("all", "sshuser")
+        user = self.config.get_config("all", "sshuser")
         if (rip is None):
             return None
         sshcmd = "ssh -p {port} -o UserKnownHostsFile={khfile} -i {key}".format(
@@ -269,7 +267,7 @@ class SSH_Tool(object):
         if (loc[0:5] == "local"):
             rip = "localhost"
 
-        user = self.config.get("all", "sshuser")
+        user = self.config.get_config("all", "sshuser")
         if (rip is None):
             return None
         sshcmd = "ssh -p {port} -o UserKnownHostsFile={khfile} -i {key}".format(
