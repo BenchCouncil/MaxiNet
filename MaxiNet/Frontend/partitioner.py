@@ -180,11 +180,11 @@ class Partitioner(object):
                     tpw += str(i) + " = " + str(shares[i]) + "\n"
                 tpwf = self._write_to_file(tpw)
                 outp = subprocess.check_output([self.metisCMD + " -tpwgts=" +
-                        tpwf + " " + self.graph + " " + str(n)], shell=True)
+                        tpwf + " " + self.graph + " " + str(n)], shell=True).decode('utf-8')
                 os.remove(tpwf)
             else:
                 outp = subprocess.check_output([self.metisCMD + " " +
-                        self.graph + " " + str(n)], shell=True)
+                        self.graph + " " + str(n)], shell=True).decode('utf-8')
             self.logger.debug(outp)
             self._parse_metis_result(self.graph + ".part." + str(n), n)
             os.remove(self.graph + ".part." + str(n))

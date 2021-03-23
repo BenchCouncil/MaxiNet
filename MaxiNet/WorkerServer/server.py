@@ -180,7 +180,7 @@ class WorkerServer(object):
 
     @Pyro4.expose
     def get_hostname(self):
-        return subprocess.check_output(["hostname"]).strip()
+        return subprocess.check_output(["hostname"]).decode('utf-8').strip()
 
     def _stop(self):
         self.logger.info("signing out...")
@@ -222,7 +222,7 @@ class WorkerServer(object):
         """
         self.logger.debug("Executing %s" % cmd)
         return subprocess.check_output(cmd, shell=True,
-                                       stderr=subprocess.STDOUT).strip()
+                                       stderr=subprocess.STDOUT).decode('utf-8').strip()
 
     @Pyro4.expose
     def script_check_output(self, cmd):
@@ -387,7 +387,7 @@ class MininetManager(object):
         if not intf:
             intf = TCIntf
         if STT:
-            subprocess.check_output(["ovs-vsctl","add-port", switch, name])
+            subprocess.check_output(["ovs-vsctl","add-port", switch, name]).decode('utf-8')
         else:
             intf(name, node=switch_i, port=port, link=None, **params)
 

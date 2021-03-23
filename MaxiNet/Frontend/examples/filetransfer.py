@@ -40,7 +40,7 @@ w3.put_file("/tmp/testfile1", "/tmp/testfile2")
 print(w3.run_cmd("md5sum /tmp/testfile1").strip())
 print(w3.run_cmd("md5sum /tmp/testfile2").strip())
 # compare files
-print(subprocess.check_output(["md5sum", "/tmp/testfile1"]).strip())
+print(subprocess.check_output(["md5sum", "/tmp/testfile1"]).decode('utf-8').strip())
 
 w3.run_cmd("rm /tmp/testfile1")  # remove file from worker
 w3.run_cmd("rm /tmp/testfile2")  # remove file from worker

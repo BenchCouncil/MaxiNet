@@ -9,7 +9,7 @@ import numpy as np
 
 
 try:
-    subprocess.check_output("env | grep DISPLAY", shell=True)
+    subprocess.check_output("env | grep DISPLAY", shell=True).decode('utf-8')
 except:
     mpl.use("Agg")
 

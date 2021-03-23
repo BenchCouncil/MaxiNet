@@ -34,7 +34,7 @@ w3.sync_get_file(testfile, testfile)
 
 print(w3.run_cmd("md5sum %s" % testfile).strip())
 # compare files
-print(subprocess.check_output(["md5sum", testfile]).strip())
+print(subprocess.check_output(["md5sum", testfile]).decode('utf-8').strip())
 
 time.sleep(2)
 

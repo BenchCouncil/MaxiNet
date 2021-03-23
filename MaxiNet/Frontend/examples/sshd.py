@@ -46,7 +46,7 @@ h2.cmd("/usr/sbin/sshd -o UseDNS=no -u0 -o \"Banner /tmp/%s.banner\"" %
 
 # Locate worker which runs on Frontend
 for w in cluster.workers():
-    if w.run_cmd("hostname") == subprocess.check_output(["hostname"]).strip():
+    if w.run_cmd("hostname") == subprocess.check_output(["hostname"]).decode('utf-8').strip():
         wid = exp.hostname_to_workerid[w.run_cmd("hostname")]
 # Add host and switch on Frontend worker.
 # Switch is needed as tunnels are only possible between switches

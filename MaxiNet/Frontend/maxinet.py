@@ -83,7 +83,7 @@ def run_cmd(cmd):
     Returns:
         Stdout of cmd call as string.
     """
-    return subprocess.check_output(cmd, shell=False)
+    return subprocess.check_output(cmd, shell=False).decode('utf-8')
 
 
 def run_cmd_shell(cmd):
@@ -98,7 +98,7 @@ def run_cmd_shell(cmd):
     Returns:
         Stdout of cmd call as string.
     """
-    return subprocess.check_output(cmd, shell=True)
+    return subprocess.check_output(cmd, shell=True).decode('utf-8')
 
 
 class Worker(object):
@@ -238,7 +238,7 @@ class Worker(object):
                 display = subprocess.check_output(
                             self.sshtool.get_ssh_cmd(targethostname=self.hn(),
                                                      cmd="env | grep DISPLAY",
-                                                     opts=["-Y"]))[8:]
+                                                     opts=["-Y"])).decode('utf-8')[8:]
                 self.mininet.tunnelX11(node, display)
                 self._x11tunnels.append(node)
             except subprocess.CalledProcessError:
@@ -624,11 +624,11 @@ class Cluster(object):
         atexit.register(self._stop)
 
         #register this Cluster to the nameserver as key self.ident:
-        myIP = subprocess.check_output("ip route get %s | cut -d' ' -f1" % ip, shell=True)
+        myIP = subprocess.check_output("ip route get %s | cut -d' ' -f1" % ip, shell=True).decode('utf-8')
         if (myIP.strip() == "local"):
             myIP = "127.0.0.1"
         else:
-            myIP = subprocess.check_output("ip route get %s" % ip, shell=True).split("src")[1].split()[0]
+            myIP = subprocess.check_output("ip route get %s" % ip, shell=True).decode('utf-8').split("src")[1].split()[0]
 
         self._pyrodaemon = Pyro4.Daemon(host=myIP)
         self._pyrodaemon._pyroHmacKey=password

@@ -182,7 +182,7 @@ class SSH_Tool(object):
 
         #workaround: for some reason ssh-ing into localhost using localhosts external IP does not work.
         #hence, we replace the external ip with localhost if necessary.
-        local = subprocess.check_output("ip route get %s" % rip, shell=True)
+        local = subprocess.check_output("ip route get %s" % rip, shell=True).decode('utf-8')
         if (local[0:5] == "local"):
             rip = "localhost"
 
@@ -208,7 +208,7 @@ class SSH_Tool(object):
     def get_scp_put_cmd(self, targethostname, local, remote, opts=None):
         rip = self.config.get_worker_ip(targethostname)
 
-        loc = subprocess.check_output("ip route get %s" % rip, shell=True)
+        loc = subprocess.check_output("ip route get %s" % rip, shell=True).decode('utf-8')
         if (loc[0:5] == "local"):
             rip = "localhost"
 
@@ -226,7 +226,7 @@ class SSH_Tool(object):
     def get_scp_get_cmd(self, targethostname, remote, local, opts=None):
         rip = self.config.get_worker_ip(targethostname)
 
-        loc = subprocess.check_output("ip route get %s" % rip, shell=True)
+        loc = subprocess.check_output("ip route get %s" % rip, shell=True).decode('utf-8')
         if (loc[0:5] == "local"):
             rip = "localhost"
 
@@ -244,7 +244,7 @@ class SSH_Tool(object):
     def get_rsync_put_cmd(self, targethostname, local, remote, opts=None):
         rip = self.config.get_worker_ip(targethostname)
 
-        loc = subprocess.check_output("ip route get %s" % rip, shell=True)
+        loc = subprocess.check_output("ip route get %s" % rip, shell=True).decode('utf-8')
         if (loc[0:5] == "local"):
             rip = "localhost"
 
@@ -265,7 +265,7 @@ class SSH_Tool(object):
     def get_rsync_get_cmd(self, targethostname, remote, local, opts=None):
         rip = self.config.get_worker_ip(targethostname)
 
-        loc = subprocess.check_output("ip route get %s" % rip, shell=True)
+        loc = subprocess.check_output("ip route get %s" % rip, shell=True).decode('utf-8')
         if (loc[0:5] == "local"):
             rip = "localhost"
 
@@ -286,7 +286,7 @@ class SSH_Tool(object):
     def add_known_host(self, ip):
         with open(self.known_hosts, "a") as kh:
             fp = subprocess.check_output(["ssh-keyscan", "-p",
-                                          str(self.config.get_sshd_port()), ip])
+                                          str(self.config.get_sshd_port()), ip]).decode('utf-8')
             kh.write(fp)
 
     def _cleanup(self):
@@ -385,5 +385,5 @@ class Tools(object):
 
     @staticmethod
     def guess_ip():
-        ip = subprocess.check_output("ifconfig -a | awk '/(cast)/ { print $2 }' | cut -d':' -f2 | head -1", shell=True)
+        ip = subprocess.check_output("ifconfig -a | awk '/(cast)/ { print $2 }' | cut -d':' -f2 | head -1", shell=True).decode('utf-8')
         return ip.strip()

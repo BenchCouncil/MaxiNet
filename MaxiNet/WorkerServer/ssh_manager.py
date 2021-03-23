@@ -70,7 +70,7 @@ class SSH_Manager(object):
     @Pyro4.expose
     def get_host_key_fingerprint(self):
         return subprocess.check_output(["ssh-keygen", "-l", "-f",
-                                        os.path.join(self.folder, "ssh_host_rsa_key")]).strip()
+                                        os.path.join(self.folder, "ssh_host_rsa_key")]).decode('utf-8').strip()
 
     @Pyro4.expose
     def initialize_ssh_folder(self, ip, port, user):
