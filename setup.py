@@ -43,5 +43,5 @@ for f in filter(lambda x: x[-3:]==".sh",os.listdir(d)):
     subprocess.call(["sudo","chmod","a+x",d+f])
 """)
     f.flush()
-    subprocess.call(["python",fn])
+    subprocess.call(["python",f.name])
     f.close()
