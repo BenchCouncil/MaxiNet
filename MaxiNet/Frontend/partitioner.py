@@ -13,6 +13,7 @@ import logging
 import os
 import subprocess
 import warnings
+from tempfile import NamedTemporaryFile
 
 from mininet.topo import Topo
 
@@ -141,7 +142,7 @@ class Partitioner(object):
         ret = ""
         for line in metis:
             ret = ret + " ".join(map(str, line)) + "\n"
-        self.graph = self._write_to_file(ret)
+        self.graph = self._write_to_file(ret).name
 
     def _convert_to_plain_topo(self, topo):
         """Convert topo to mininet.topo.Topo instance.
@@ -180,8 +181,8 @@ class Partitioner(object):
                     tpw += str(i) + " = " + str(shares[i]) + "\n"
                 tpwf = self._write_to_file(tpw)
                 outp = subprocess.check_output([self.metisCMD + " -tpwgts=" +
-                        tpwf + " " + self.graph + " " + str(n)], shell=True).decode('utf-8')
-                os.remove(tpwf)
+                        tpwf.name + " " + self.graph + " " + str(n)], shell=True).decode('utf-8')
+                tpwf.close()
             else:
                 outp = subprocess.check_output([self.metisCMD + " " +
                         self.graph + " " + str(n)], shell=True).decode('utf-8')
@@ -221,13 +222,12 @@ class Partitioner(object):
     def _write_to_file(self, pstr):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            filename = os.tempnam()
-        self.logger.debug("metis file: " + filename)
+        f = NamedTemporaryFile('w+t')
+        self.logger.debug("metis file: " + f.name)
         self.logger.debug(pstr)
-        f = open(filename, "w")
         f.write(pstr)
-        f.close()
-        return filename
+        f.flush()
+        return f
 
     def _parse_metis_result(self, filepath, n):
         for i in range(0, n):
