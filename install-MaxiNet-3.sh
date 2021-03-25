@@ -32,7 +32,7 @@ git clone git://github.com/containernet/containernet.git
 cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 cd ..
-sudo make develop
+sudo make install
 
 
 echo "##### install metis #####"
@@ -51,9 +51,7 @@ sudo python -m pip install Pyro4
 
 
 echo "##### install MaxiNet #####"
-cd ~
-# clone python3 repository instead of origin version
-git clone git://github.com/ChengHuangUCAS/MaxiNet.git
-cd MaxiNet
+# NOTICE: assuming MaxiNet-3 repository in cloned to ~/
+cd ~/MaxiNet
 sudo make install
 
