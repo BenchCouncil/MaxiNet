@@ -28,7 +28,8 @@ if [ $? -ne 0 ]; then
   echo "localhost ansible_connection=local" | sudo tee -a /etc/ansible/hosts
 fi
 cd ~
-git clone git://github.com/containernet/containernet.git
+echo "use my containernet branch"
+git clone git://github.com/ChengHuangUCAS/containernet.git
 cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 cd ..
