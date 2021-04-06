@@ -1,6 +1,6 @@
-import sys, subprocess,distutils
+import sys, os, subprocess, distutils
 from setuptools import setup, find_packages
-from tempfile import NamedTemporaryFile
+from tempfile import mkstemp
 
 setup(name='MaxiNet-3',
       version='1.0',
@@ -32,7 +32,8 @@ setup(name='MaxiNet-3',
 if((__name__=="__main__") and (sys.argv[1] == "install")):
     # We need to make package_data files executable...
     # Ugly hack:
-    f = NamedTemporaryFile('w+t')
+    ft = mkstemp()
+    f = open(ft[1], 'w')
     f.write("""
 import os,subprocess
 print("Setting executable bits...")
@@ -42,6 +43,6 @@ for f in filter(lambda x: x[-3:]==".sh",os.listdir(d)):
     print(f)
     subprocess.call(["sudo","chmod","a+x",d+f])
 """)
-    f.flush()
-    subprocess.call(["python",f.name])
     f.close()
+    subprocess.call(["python", ft[1]])
+    os.remove(ft[1])
