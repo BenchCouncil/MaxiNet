@@ -7,6 +7,7 @@ echo "This program installs MaxiNet-3 1.0 and all requirements to the home direc
 
 echo "MaxiNet installer will now install: "
 echo " -Containernet 2.2.1 (and Docker as well)"
+echo " -Pox 0.7"
 echo " -Metis 5.1"
 echo " -Pyro 4"
 echo " -MaxiNet-3 1.0"
@@ -34,6 +35,11 @@ cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 cd ..
 sudo make install
+
+
+echo "##### install pox #####"
+cd ~
+git clone https://github.com/noxrepo/pox.git
 
 
 echo "##### install metis #####"
