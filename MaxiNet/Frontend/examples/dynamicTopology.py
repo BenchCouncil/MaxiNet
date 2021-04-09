@@ -41,7 +41,7 @@ time.sleep(5)
 print("pinging h2 from h1 to check network connectivity...")
 print(exp.get_node("h1").cmd("ping -c 5 10.0.0.2"))  # show network connectivity
 
-raw_input("[Continue]")  # wait for user to acknowledge network connectivity
+input("[Continue]")  # wait for user to acknowledge network connectivity
 print("adding switch on second worker...")
 # Enforce placement of s2 on Worker 2. Otherwise random worker would be chosen
 exp.addSwitch("s2", dpid=Tools.makeDPID(2), wid=1)
@@ -60,5 +60,5 @@ print("pinging h4 and h1 from h3 to check connectivity of new host...")
 # show network connectivity of new hosts
 print(exp.get("h3").cmd("ping -c5 10.0.0.4"))
 print(exp.get("h3").cmd("ping -c5 10.0.0.1"))
-raw_input("[Done]")
+input("[Done]")
 exp.stop()

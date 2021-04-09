@@ -14,6 +14,7 @@ import time
 
 from MaxiNet.Frontend import maxinet
 from MaxiNet.tools import FatTree
+from mininet.node import OVSSwitch
 
 topo = FatTree(4, 10, 0.1)
 
@@ -21,7 +22,7 @@ topo = FatTree(4, 10, 0.1)
 cluster = maxinet.Cluster()
 
 # create experiment on cluster with FatTree topology
-exp = maxinet.Experiment(cluster, topo)
+exp = maxinet.Experiment(cluster, topo, switch=OVSSwitch)
 exp.setup()
 time.sleep(2)
 

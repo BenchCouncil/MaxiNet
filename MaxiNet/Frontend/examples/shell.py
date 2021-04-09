@@ -9,11 +9,12 @@
 
 from MaxiNet.Frontend import maxinet
 from MaxiNet.tools import FatTree
+from mininet.node import OVSSwitch
 
 topo = FatTree(4, 10, 0.1)
 cluster = maxinet.Cluster()
 
-exp = maxinet.Experiment(cluster, topo)
+exp = maxinet.Experiment(cluster, topo, switch=OVSSwitch)
 exp.setup()
 
 exp.CLI(locals(), globals())

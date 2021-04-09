@@ -62,5 +62,5 @@ exp.get("root").setIP("10.0.0.3", 8)
 
 print("*** You may now ssh into", h1.name, "at", h1.IP(), "or", h2.name, "at", h2.IP())
 print("Press [Enter] to end MaxiNet")
-raw_input()
+input()
 exp.stop()
