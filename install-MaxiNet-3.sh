@@ -39,7 +39,7 @@ sudo make install
 
 echo "##### install pox #####"
 cd ~
-git clone https://github.com/noxrepo/pox.git
+git clone git://github.com/noxrepo/pox.git
 
 
 echo "##### install metis #####"
@@ -65,5 +65,5 @@ sudo make install
 
 echo "##### download Dockerfiles #####"
 cd ~
-git clone https://github.com/ChengHuangUCAS/MaxiNetDockerfile.git
+git clone git://github.com/ChengHuangUCAS/MaxiNetDockerfile.git
 
