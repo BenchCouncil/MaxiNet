@@ -62,3 +62,8 @@ echo "##### install MaxiNet #####"
 cd ~/MaxiNet
 sudo make install
 
+
+echo "##### download Dockerfiles #####"
+cd ~
+git clone https://github.com/ChengHuangUCAS/MaxiNetDockerfile.git
+
