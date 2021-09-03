@@ -181,7 +181,7 @@ class Partitioner(object):
                     tpw += str(i) + " = " + str(shares[i]) + "\n"
                 tpwf = self._write_to_file(tpw)
                 outp = subprocess.check_output([self.metisCMD + " -tpwgts=" +
-                        tpwf.name + " " + self.graph + " " + str(n)], shell=True).decode('utf-8')
+                        tpwf + " " + self.graph + " " + str(n)], shell=True).decode('utf-8')
                 os.remove(tpwf)
             else:
                 outp = subprocess.check_output([self.metisCMD + " " +
@@ -223,7 +223,7 @@ class Partitioner(object):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
         ft = mkstemp()
-        self.logger.debug("metis file: " + f.name)
+        self.logger.debug("metis file: " + ft[1])
         self.logger.debug(pstr)
         f = open(ft[1], 'w')
         f.write(pstr)

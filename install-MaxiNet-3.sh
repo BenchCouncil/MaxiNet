@@ -1,4 +1,5 @@
 #!/bin/bash
+# NOTICE: assuming MaxiNet-3 repository in cloned to ~/
 
 echo "MaxiNet-3 1.0 installer"
 echo ""
@@ -63,7 +64,7 @@ cd ~/MaxiNet
 sudo make install
 
 
-echo "##### download Dockerfiles #####"
-cd ~
-git clone git://github.com/ChengHuangUCAS/MaxiNetDockerfile.git
+# echo "##### download Dockerfiles #####"
+# cd ~
+# git clone git://github.com/ChengHuangUCAS/MaxiNetDockerfile.git
 
