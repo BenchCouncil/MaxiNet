@@ -20,7 +20,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 sudo apt-get install python3-pip python3-matplotlib -y
 
 echo "##### install required dependencies #####"
-sudo apt-get install git autoconf screen cmake build-essential sysstat uuid-runtime -y
+sudo apt-get install git autoconf screen cmake make build-essential sysstat uuid-runtime -y
 
 echo "##### install containernet (as well as docker) #####"
 sudo apt-get install ansible aptitude -y
@@ -30,8 +30,8 @@ if [ $? -ne 0 ]; then
   echo "localhost ansible_connection=local" | sudo tee -a /etc/ansible/hosts
 fi
 cd ~
-echo "use my containernet branch"
-git clone git://github.com/ChengHuangUCAS/containernet.git
+echo "use BenchCouncil/containernet branch"
+git clone git://github.com/BenchCouncil/containernet.git
 cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 cd ..
